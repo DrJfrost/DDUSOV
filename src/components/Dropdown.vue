@@ -1,83 +1,57 @@
 <template>
-  <component
-    class="dropdown"
-    :is="tag"
+  <div
     :class="[
-      { show: isOpen },
+      { open: isOpen },
       { dropdown: direction === 'down' },
       { dropup: direction === 'up' }
     ]"
-    aria-haspopup="true"
-    :aria-expanded="isOpen"
     @click="toggleDropDown"
     v-click-outside="closeDropDown"
   >
     <slot name="title">
       <a
-        class="dropdown-toggle nav-link"
-        :class="{ 'no-caret': hideArrow }"
+        class="dropdown-toggle"
         data-toggle="dropdown"
+        href="javascript:void(0)"
       >
         <i :class="icon"></i>
-        <span class="no-icon">{{ title }}</span>
+        <p>{{ title }}</p>
       </a>
     </slot>
-    <ul
-      class="dropdown-menu"
-      :class="[
-        { 'dropdown-menu-right': position === 'right' },
-        { show: isOpen }
-      ]"
-    >
-      <slot></slot>
-    </ul>
-  </component>
+    <slot></slot>
+  </div>
 </template>
 <script>
 export default {
-  name: 'drop-down',
+  name: "drop-down",
   props: {
     direction: {
       type: String,
-      default: 'down'
+      default: "down"
+    },
+    multiLevel: {
+      type: Boolean,
+      default: false
     },
     title: String,
-    icon: String,
-    position: String,
-    hideArrow: Boolean,
-    tag: {
-      type: String,
-      default: 'li'
-    }
+    icon: String
   },
   data() {
     return {
       isOpen: false
     };
   },
-  provide() {
-    return {
-      closeDropDown: this.closeDropDown
-    }
-  },
   methods: {
     toggleDropDown() {
-      this.isOpen = !this.isOpen;
-      this.$emit('change', this.isOpen);
+      if (this.multiLevel) {
+        this.isOpen = true;
+      } else {
+        this.isOpen = !this.isOpen;
+      }
     },
     closeDropDown() {
       this.isOpen = false;
-      this.$emit('change', this.isOpen);
     }
   }
 };
 </script>
-<style>
-.dropdown {
-  list-style-type: none;
-}
-
-.dropdown .dropdown-toggle {
-  cursor: pointer;
-}
-</style>

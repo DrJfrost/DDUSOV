@@ -1,141 +1,267 @@
 <template>
-  <navbar
-    position="fixed"
-    type="primary"
-    :transparent="transparent"
+  <md-toolbar
+    id="toolbar"
+    md-elevation="0"
+    class="md-transparent md-absolute"
+    :class="extraNavClasses"
     :color-on-scroll="colorOnScroll"
-    menu-classes="ml-auto"
   >
-    <template>
-      <router-link v-popover:popover1 class="navbar-brand" to="/">
-        Now Ui Kit
-      </router-link>
-      <el-popover
-        ref="popover1"
-        popper-class="popover"
-        placement="bottom"
-        width="200"
-        trigger="hover"
-      >
-        <div class="popover-body">
-          Designed by Invision. Coded by Creative Tim
-        </div>
-      </el-popover>
-    </template>
-    <template slot="navbar-menu">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          href="https://www.creative-tim.com/product/vue-now-ui-kit"
-          target="_blank"
+    <div class="md-toolbar-row md-collapse-lateral">
+      <div class="md-toolbar-section-start">
+        <h3 class="md-title">DDUSOV</h3>
+      </div>
+      <div class="md-toolbar-section-end">
+        <md-button
+          class="md-just-icon md-simple md-toolbar-toggle"
+          :class="{ toggled: toggledClass }"
+          @click="toggleNavbarMobile()"
         >
-          <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-          <p>Download</p>
-        </a>
-      </li>
-      <drop-down
-        tag="li"
-        title="Components"
-        icon="now-ui-icons design_app"
-        class="nav-item"
-      >
-        <nav-link to="/">
-          <i class="now-ui-icons business_chart-pie-36"></i> All components
-        </nav-link>
-        <a
-          href="https://demos.creative-tim.com/vue-now-ui-kit/documentation"
-          target="_blank"
-          class="dropdown-item"
-        >
-          <i class="now-ui-icons design_bullet-list-67"></i> Documentation
-        </a>
-      </drop-down>
-      <drop-down
-              tag="li"
-              title="Examples"
-              icon="now-ui-icons design_image"
-              class="nav-item"
-      >
-        <nav-link to="/landing">
-          <i class="now-ui-icons education_paper"></i> Landing
-        </nav-link>
-        <nav-link to="/login">
-          <i class="now-ui-icons users_circle-08"></i> Login
-        </nav-link>
-        <nav-link to="/profile">
-          <i class="now-ui-icons users_single-02"></i> Profile
-        </nav-link>
-      </drop-down>
-      <li class="nav-item">
-        <a
-          class="nav-link btn btn-neutral"
-          href="https://www.creative-tim.com/product/vue-now-ui-kit-pro"
-          target="_blank"
-        >
-          <i class="now-ui-icons arrows-1_share-66"></i>
-          <p>Upgrade to PRO</p>
-        </a>
-      </li>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </md-button>
 
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          rel="tooltip"
-          title="Follow us on Twitter"
-          data-placement="bottom"
-          href="https://twitter.com/CreativeTim"
-          target="_blank"
-        >
-          <i class="fab fa-twitter"></i>
-          <p class="d-lg-none d-xl-none">Twitter</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          rel="tooltip"
-          title="Like us on Facebook"
-          data-placement="bottom"
-          href="https://www.facebook.com/CreativeTim"
-          target="_blank"
-        >
-          <i class="fab fa-facebook-square"></i>
-          <p class="d-lg-none d-xl-none">Facebook</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          rel="tooltip"
-          title="Follow us on Instagram"
-          data-placement="bottom"
-          href="https://www.instagram.com/CreativeTimOfficial"
-          target="_blank"
-        >
-          <i class="fab fa-instagram"></i>
-          <p class="d-lg-none d-xl-none">Instagram</p>
-        </a>
-      </li>
-    </template>
-  </navbar>
+        <div class="md-collapse">
+          <div class="md-collapse-wrapper">
+            <mobile-menu nav-mobile-section-start="false">
+              <!-- Here you can add your items from the section-start of your toolbar -->
+            </mobile-menu>
+            <md-list>
+              <li class="md-list-item" v-if="!showDownload">
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                >
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-white md-simple dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        <i class="material-icons">apps</i>
+                        <p>Components</p>
+                      </md-button>
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                          <a href="#/">
+                            <i class="material-icons">layers</i>
+                            <p>All Components</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                          >
+                            <i class="material-icons">content_paste</i>
+                            <p>Documentation</p>
+                          </a>
+                        </li>
+                      </ul>
+                    </drop-down>
+                  </div>
+                </a>
+              </li>
+
+              <md-list-item
+                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                target="_blank"
+                v-if="showDownload"
+              >
+                <i class="material-icons">content_paste</i>
+                <p>Documentation</p>
+              </md-list-item>
+
+              <md-list-item
+                href="javascript:void(0)"
+                @click="scrollToElement()"
+                v-if="showDownload"
+              >
+                <i class="material-icons">cloud_download</i>
+                <p>Download</p>
+              </md-list-item>
+
+              <li class="md-list-item" v-else>
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                >
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-white md-simple dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        <i class="material-icons">view_carousel</i>
+                        <p>Examples</p>
+                      </md-button>
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                          <a href="#/landing">
+                            <i class="material-icons">view_day</i>
+                            <p>Landing Page</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#/login">
+                            <i class="material-icons">fingerprint</i>
+                            <p>Login Page</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#/profile">
+                            <i class="material-icons">account_circle</i>
+                            <p>Profile Page</p>
+                          </a>
+                        </li>
+                      </ul>
+                    </drop-down>
+                  </div>
+                </a>
+              </li>
+
+              <md-list-item
+                href="https://twitter.com/CreativeTim"
+                target="_blank"
+              >
+                <i class="fab fa-twitter"></i>
+                <p class="hidden-lg">Twitter</p>
+                <md-tooltip md-direction="bottom"
+                  >Follow us on Twitter</md-tooltip
+                >
+              </md-list-item>
+              <md-list-item
+                href="https://www.facebook.com/CreativeTim"
+                target="_blank"
+              >
+                <i class="fab fa-facebook-square"></i>
+                <p class="hidden-lg">Facebook</p>
+                <md-tooltip md-direction="bottom"
+                  >Like us on Facebook</md-tooltip
+                >
+              </md-list-item>
+              <md-list-item
+                href="https://www.instagram.com/CreativeTimOfficial"
+                target="_blank"
+              >
+                <i class="fab fa-instagram"></i>
+                <p class="hidden-lg">Instagram</p>
+                <md-tooltip md-direction="bottom"
+                  >Follow us on Instagram</md-tooltip
+                >
+              </md-list-item>
+            </md-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
 </template>
 
 <script>
-import { DropDown, Navbar, NavLink } from '@/components';
-import { Popover } from 'element-ui';
+let resizeTimeout;
+function resizeThrottler(actualResizeHandler) {
+  // ignore resize events as long as an actualResizeHandler execution is in the queue
+  if (!resizeTimeout) {
+    resizeTimeout = setTimeout(() => {
+      resizeTimeout = null;
+      actualResizeHandler();
+
+      // The actualResizeHandler will execute at a rate of 15fps
+    }, 66);
+  }
+}
+
+import MobileMenu from "@/layout/MobileMenu";
 export default {
-  name: 'main-navbar',
-  props: {
-    transparent: Boolean,
-    colorOnScroll: Number
-  },
   components: {
-    DropDown,
-    Navbar,
-    NavLink,
-    [Popover.name]: Popover
+    MobileMenu
+  },
+  props: {
+    type: {
+      type: String,
+      default: "white",
+      validator(value) {
+        return [
+          "white",
+          "default",
+          "primary",
+          "danger",
+          "success",
+          "warning",
+          "info"
+        ].includes(value);
+      }
+    },
+    colorOnScroll: {
+      type: Number,
+      default: 0
+    }
+  },
+  data() {
+    return {
+      extraNavClasses: "",
+      toggledClass: false
+    };
+  },
+  computed: {
+    showDownload() {
+      const excludedRoutes = ["login", "landing", "profile"];
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
+  },
+  methods: {
+    bodyClick() {
+      let bodyClick = document.getElementById("bodyClick");
+
+      if (bodyClick === null) {
+        let body = document.querySelector("body");
+        let elem = document.createElement("div");
+        elem.setAttribute("id", "bodyClick");
+        body.appendChild(elem);
+
+        let bodyClick = document.getElementById("bodyClick");
+        bodyClick.addEventListener("click", this.toggleNavbarMobile);
+      } else {
+        bodyClick.remove();
+      }
+    },
+    toggleNavbarMobile() {
+      this.NavbarStore.showNavbar = !this.NavbarStore.showNavbar;
+      this.toggledClass = !this.toggledClass;
+      this.bodyClick();
+    },
+    handleScroll() {
+      let scrollValue =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      let navbarColor = document.getElementById("toolbar");
+      this.currentScrollValue = scrollValue;
+      if (this.colorOnScroll > 0 && scrollValue > this.colorOnScroll) {
+        this.extraNavClasses = `md-${this.type}`;
+        navbarColor.classList.remove("md-transparent");
+      } else {
+        if (this.extraNavClasses) {
+          this.extraNavClasses = "";
+          navbarColor.classList.add("md-transparent");
+        }
+      }
+    },
+    scrollListener() {
+      resizeThrottler(this.handleScroll);
+    },
+    scrollToElement() {
+      let element_id = document.getElementById("downloadSection");
+      if (element_id) {
+        element_id.scrollIntoView({ block: "end", behavior: "smooth" });
+      }
+    }
+  },
+  mounted() {
+    document.addEventListener("scroll", this.scrollListener);
+  },
+  beforeDestroy() {
+    document.removeEventListener("scroll", this.scrollListener);
   }
 };
 </script>
-
-<style scoped></style>

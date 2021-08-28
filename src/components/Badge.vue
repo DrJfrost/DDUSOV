@@ -1,42 +1,31 @@
 <template>
-  <component
-    :is="componentTag"
-    class="badge"
-    :class="`badge-${type}`"
-    :href="href"
-  >
+  <component :is="tag" class="badge" :class="`badge-${type}`">
     <slot></slot>
   </component>
 </template>
 <script>
 export default {
-  name: 'badge',
+  name: "badge",
   props: {
     tag: {
       type: String,
-      default: 'span'
+      default: "span"
     },
-    href: String,
     type: {
       type: String,
-      default: 'default',
+      default: "default",
       validator: value => {
         let acceptedValues = [
-          'primary',
-          'info',
-          'success',
-          'warning',
-          'danger',
-          'default',
-          'neutral'
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger",
+          "rose",
+          "default"
         ];
         return acceptedValues.indexOf(value) !== -1;
       }
-    }
-  },
-  computed: {
-    componentTag() {
-      return this.href ? 'a' : this.tag;
     }
   }
 };

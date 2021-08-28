@@ -1,13 +1,23 @@
-# Change Log
+# Change Logs
 
-## [1.1.1] 2020-07-01
-- Update packages
+## [1.2.2] 2019-12-13
+### Dependencies Updates
+- Updated all out of date dependencies from `package.json` file
+- The version is now `v1.2.2` to have the same versioning line with the PRO version of this product
 
-## [1.1.0] 2019-02-12
-- Update all packages and lint files
-- Fix UI issues related to form group input
-- Add missing polyfills for IE
-- Add examples dropdown with links to landing, profile and login pages
+## [1.2.0] 2019-07-19
+### Updates
+- Vue Material updated to the latest release `v1.0.0-beta-11`
+- Vuejs updated to the latest release `v2.6.10`
+- Updated the rest of dependencies to the latest release
 
-## [1.0.0] 2018-08-24
-### Stable Original Release
+## [1.1.0] 2019-01-22
+### Updates
+- Updated all dependencies to the last version
+
+## [1.0.1] 2019-01-22
+### Feature
+- button `Vue Material Kit Pro` from `index.vue` activated
+
+## [1.0.0] 2018-09-27
+### Initial Release

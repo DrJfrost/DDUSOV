@@ -18,7 +18,7 @@ function debounce(func, wait, immediate) {
   };
 }
 export default {
-  name: 'parallax',
+  name: "parallax",
   data() {
     return {
       styles: {},
@@ -42,9 +42,11 @@ export default {
   },
   mounted() {
     let self = this;
-    window.addEventListener('scroll', function() {
-      let scrollVal = this.scrollY;
-      self.checkForParallax(scrollVal);
+    window.addEventListener("scroll", function() {
+      if (window.innerWidth > 991) {
+        let scrollVal = this.scrollY;
+        self.checkForParallax(scrollVal);
+      }
     });
   }
 };

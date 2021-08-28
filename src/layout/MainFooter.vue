@@ -22,20 +22,17 @@
               Blog
             </a>
           </li>
+          <li>
+            <a href="https://www.creative-tim.com/license">
+              Licenses
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="copyright">
-        &copy; {{ year }}, Designed by
-        <a href="https:///www.invisionapp.com" target="_blank" rel="noopener"
-          >Invision</a
-        >. Coded by
-        <a href="https://binarcode.com" target="_blank" rel="noopener"
-          >BinarCode</a
-        >
-        and
-        <a href="https://www.creative-tim.com" target="_blank" rel="noopener"
-          >Creative Tim</a
-        >.
+        &copy; {{ year }}, made with <md-icon>favorite</md-icon> by
+        <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a>
+        for a better web.
       </div>
     </div>
   </footer>

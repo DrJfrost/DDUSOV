@@ -2,48 +2,53 @@
   <ul class="pagination" :class="paginationClass">
     <li
       class="page-item prev-page"
-      :class="[{ disabled: value === 1 }, prevItemClasses]"
+      :class="{ disabled: value === 1, 'no-arrows': noArrows }"
     >
       <a class="page-link" aria-label="Previous" @click="prevPage">
-        <slot name="prev">»</slot>
+        <template v-if="withText">Prev</template>
+        <i class="fas fa-angle-double-left" v-else></i>
       </a>
     </li>
     <li
       class="page-item"
       v-for="item in range(minPage, maxPage)"
       :key="item"
-      :class="[{ active: value === item }, itemClasses]"
+      :class="{ active: value === item }"
     >
       <a class="page-link" @click="changePage(item)">{{ item }}</a>
     </li>
     <li
       class="page-item page-pre next-page"
-      :class="[{ disabled: value === totalPages }, nextItemClasses]"
+      :class="{ disabled: value === totalPages, 'no-arrows': noArrows }"
     >
       <a class="page-link" aria-label="Next" @click="nextPage">
-        <slot name="next">»</slot>
+        <template v-if="withText">Next</template>
+        <i class="fas fa-angle-double-right" v-else></i>
       </a>
     </li>
   </ul>
 </template>
 <script>
 export default {
-  name: 'n-pagination',
+  name: "pagination",
   props: {
     type: {
       type: String,
-      default: 'primary',
+      default: "primary",
       validator: value => {
         return [
-          'default',
-          'primary',
-          'danger',
-          'success',
-          'warning',
-          'info'
+          "default",
+          "primary",
+          "danger",
+          "success",
+          "warning",
+          "info",
+          "rose"
         ].includes(value);
       }
     },
+    withText: Boolean,
+    noArrows: Boolean,
     pageCount: {
       type: Number,
       default: 0
@@ -59,10 +64,7 @@ export default {
     value: {
       type: Number,
       default: 1
-    },
-    prevItemClasses: [String, Object],
-    itemClasses: [String, Object],
-    nextItemClasses: [String, Object]
+    }
   },
   computed: {
     paginationClass() {
@@ -121,25 +123,25 @@ export default {
       return arr;
     },
     changePage(item) {
-      this.$emit('input', item);
+      this.$emit("input", item);
     },
     nextPage() {
       if (this.value < this.totalPages) {
-        this.$emit('input', this.value + 1);
+        this.$emit("input", this.value + 1);
       }
     },
     prevPage() {
       if (this.value > 1) {
-        this.$emit('input', this.value - 1);
+        this.$emit("input", this.value - 1);
       }
     }
   },
   watch: {
     perPage() {
-      this.$emit('input', 1);
+      this.$emit("input", 1);
     },
     total() {
-      this.$emit('input', 1);
+      this.$emit("input", 1);
     }
   }
 };
