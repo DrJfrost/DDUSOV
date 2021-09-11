@@ -219,6 +219,18 @@
                 >. Every product has a huge number of components, sections and
                 example pages. Start Your Development With A Badass Bootstrap UI
                 Kit inspired by Material Design.
+
+    
+              </h4>
+            </div>
+            <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
+              <h2>Results</h2>
+              <md-field>
+                <md-input v-model="searchInput" placeholder="Regular"></md-input>
+              </md-field>
+              <md-button class="md-primary md-block" @click="searchResults">Buscar Paper</md-button>
+              <h4>
+                {{getResults}}    
               </h4>
             </div>
             <div class="md-layout-item md-size-50 md-small-size-100 mx-auto">
@@ -276,6 +288,8 @@ import Notifications from "./components/NotificationsSection";
 import TypographyImages from "./components/TypographyImagesSection";
 import JavascriptComponents from "./components/JavascriptComponentsSection";
 import { LoginCard } from "@/components";
+import { mapGetters, mapActions } from 'vuex'
+
 
 export default {
   components: {
@@ -330,19 +344,30 @@ export default {
       firstname: null,
       email: null,
       password: null,
-      leafShow: false
+      leafShow: false,
+      searchInput: ''
     };
   },
   methods: {
+    ...mapActions('scholarAPI', [
+      'search',
+    ]),
     leafActive() {
       if (window.innerWidth < 768) {
         this.leafShow = false;
       } else {
         this.leafShow = true;
       }
+    },
+    searchResults(){
+      console.log(this.searchInput)
+      this.search(this.searchInput);
     }
   },
   computed: {
+    ...mapGetters('scholarAPI', [
+      'getResults',
+    ]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.image})`
