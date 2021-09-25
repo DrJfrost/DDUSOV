@@ -19,258 +19,112 @@
     <div class="main main-raised">
       <div class="section section-basic">
         <div class="container">
-          <div class="title">
-            <h2>Basic Elements</h2>
+          <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
+            <h2 class="text-center text-primary title">Virtus</h2>
+            <md-field>
+              <md-icon>search</md-icon>
+              <label>Ingrese el texto de busqueda</label>
+              <md-input v-model="searchInput" placeholder=""></md-input>
+            </md-field>
+            <md-button class="md-primary md-block md-round" @click="searchResults"><md-icon class="fa-spin" v-if="loading">restore_page</md-icon>Buscar</md-button>
           </div>
-          <basic-elements></basic-elements>
-        </div>
-      </div>
-      <div class="section section-navbars">
-        <div class="container">
-          <small-navigation></small-navigation>
-        </div>
-        <navigation></navigation>
-      </div>
-      <div class="section section-tabs">
-        <div class="container">
-          <tabs></tabs>
-        </div>
-      </div>
-      <div class="section section-white">
-        <div class="container">
-          <nav-pills></nav-pills>
-        </div>
-      </div>
-      <div class="section section-notifications">
-        <div class="container">
-          <div class="title">
-            <h3>Notifications</h3>
-          </div>
-        </div>
-        <notifications></notifications>
-      </div>
-      <div class="section">
-        <div class="container">
-          <typography-images></typography-images>
-        </div>
-      </div>
-      <div class="section section-javascript">
-        <div class="container">
-          <javascript-components></javascript-components>
-        </div>
-      </div>
-      <div class="section">
-        <div class="container text-center">
-          <div class="md-layout">
-            <div
-              class="md-layout-item md-size-66 md-xsmall-size-100 ml-auto mr-auto text-center"
-            >
-              <h2>Completed with examples</h2>
-              <h4>
-                The kit comes with three pre-built pages to help you get started
-                faster. You can change the text and images and you're good to
-                go. More importantly, looking at them will give you a picture of
-                what you can built with this powerful kit.
-              </h4>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section section-signup page-header" :style="signupImage">
-        <div class="container">
-          <div class="md-layout">
-            <div
-              class="md-layout-item md-size-33 md-medium-size-40 md-small-size-50 md-xsmall-size-70 mx-auto text-center"
-            >
-              <login-card header-color="green">
-                <h4 slot="title" class="card-title">Login</h4>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
-                  <i class="fab fa-facebook-square"></i>
-                </md-button>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
-                  <i class="fab fa-twitter"></i>
-                </md-button>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
-                  <i class="fab fa-google-plus-g"></i>
-                </md-button>
-                <p slot="description" class="description">Or Be Classical</p>
-                <md-field class="md-form-group" slot="inputs">
-                  <md-icon>face</md-icon>
-                  <label>First Name...</label>
-                  <md-input v-model="firstname"></md-input>
-                </md-field>
-                <md-field class="md-form-group" slot="inputs">
-                  <md-icon>email</md-icon>
-                  <label>Email...</label>
-                  <md-input v-model="email" type="email"></md-input>
-                </md-field>
-                <md-field class="md-form-group" slot="inputs">
-                  <md-icon>lock_outline</md-icon>
-                  <label>Password...</label>
-                  <md-input v-model="password"></md-input>
-                </md-field>
-                <md-button slot="footer" class="md-simple md-success md-lg">
-                  Get Started
-                </md-button>
-              </login-card>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="md-layout">
-        <div class="md-layout-item text-center">
-          <md-button href="#/login" class="md-simple md-success md-lg"
-            >View Login Page</md-button
-          >
-        </div>
-      </div>
-      <div class="section section-examples">
-        <div class="container-fluid text-center">
-          <div class="md-layout">
+          <div class="md-layout results-text">
             <div class="md-layout-item">
-              <a href="#/landing" target="_blank">
-                <img
-                  :src="landing"
-                  alt="Rounded Image"
-                  class="img-raised rounded img-fluid"
-                />
-              </a>
-              <md-button href="#/landing" class="md-simple md-success md-lg"
-                >View Landing Page</md-button
-              >
+              <h4 v-if="queryString" class="text-left">
+                Resultados de la busqueda <b class="text-primary">"{{queryString}}"</b>
+              </h4>
             </div>
             <div class="md-layout-item">
-              <a href="#/profile" target="_blank">
-                <img
-                  :src="profile"
-                  alt="Rounded Image"
-                  class="img-raised rounded img-fluid"
-                />
-              </a>
-              <md-button href="#/profile" class="md-simple md-success md-lg"
-                >View Profile Page</md-button
-              >
+              <p v-if="queryString" class="text-right text-muted">
+                <b>"{{hitCount}}"</b> <span class="">Resultados encontrados</span>
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="section section-download" id="downloadSection">
-        <div class="container">
-          <div class="md-layout text-center">
-            <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
-              <h2>Do you love this UI Kit?</h2>
-              <h4>
-                Cause if you do, it can be yours for FREE. Hit the buttons below
-                to navigate to our website where you can find the kit. Our
-                friends from
-                <a
-                  href="https://themeisle.com/?utm_campaign=mkfree-hestia&amp;utm_source=creativetim&amp;utm_medium=website"
-                  target="_blank"
-                  >ThemeIsle</a
-                >
-                created a Wordpress Theme which can be also downloaded for free.
-                Start a new project or give an old Bootstrap project a new look!
-              </h4>
-            </div>
-            <div class="md-layout-item md-size-50 md-small-size-100 mx-auto">
-              <md-button
-                href="https://www.creative-tim.com/product/material-kit"
-                target="_blank"
-                class="md-success md-lg"
-                ><i class="fab fa-html5"></i> Free HTML Download</md-button
-              >
-              <md-button
-                href="https://themeisle.com/themes/hestia/?utm_campaign=mkfree-hestia&amp;utm_source=creativetim&amp;utm_medium=website"
-                class="md-success md-lg"
-                target="_blank"
-                ><i class="fab fa-wordpress"></i> Wordpress Theme</md-button
-              >
-            </div>
-          </div>
-          <br /><br />
-
-          <div class="md-layout text-center">
-            <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
-              <h2>Want more?</h2>
-              <h4>
-                We've just launched
-                <a
-                  href="https://www.creative-tim.com/product/vue-material-dashboard-pro?ref=utp-mk-demos"
-                  target="_blank"
-                  >Vue Material Dashboard PRO</a
-                >
-                and
-                <a
-                  href="https://www.creative-tim.com/product/vue-material-kit-pro?ref=utp-vmk-demos"
-                  target="_blank"
-                  >Vue Material Kit PRO</a
-                >. Every product has a huge number of components, sections and
-                example pages. Start Your Development With A Badass Bootstrap UI
-                Kit inspired by Material Design.
-
-    
-              </h4>
-            </div>
-            <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
-              <h2>Results</h2>
+          <div class="md-layout" v-if="getResults">
+            <div class="md-layout-item">
               <md-field>
-                <md-input v-model="searchInput" placeholder="Regular"></md-input>
+                <label>Resultados por pagina</label>
+                <md-input v-model="pageSize" type="number" min=0 @change="searchResults"></md-input>
               </md-field>
-              <md-button class="md-primary md-block" @click="searchResults">Buscar Paper</md-button>
-              <h4>
-                {{getResults}}    
-              </h4>
             </div>
-            <div class="md-layout-item md-size-50 md-small-size-100 mx-auto">
-              <div class="btn-container">
-                <md-button
-                  href="https://www.creative-tim.com/product/vue-material-kit-pro?ref=utp-vmk-demos"
-                  class="md-button md-success md-lg md-upgrade"
-                  target="_blank"
-                  ><md-icon>unarchive</md-icon>Vue Material Kit PRO</md-button
-                >
-                <md-button
-                  href="https://www.creative-tim.com/product/vue-material-dashboard-pro?ref=utp-vmd-demos"
-                  class="md-button md-success md-lg md-upgrade"
-                  target="_blank"
-                  ><md-icon>unarchive</md-icon>Vue Material Dashboard
-                  PRO</md-button
-                >
-              </div>
+            <div class="md-layout-item pagination-section md-block">
+              <md-button class="md-primary md-sm" v-if="getPreviousPageUrls.length>0" @click="previousPageResults()">
+                <md-icon>navigate_before</md-icon>
+                Anterior
+              </md-button>
+              <md-button class="md-primary md-sm" v-if="getNextPageUrl" @click="nextPageResults()">
+                Siguiente
+                <md-icon>navigate_next</md-icon>
+              </md-button>
+            </div>
+            <div class="md-layout-item"></div>
+          </div>
+          <div v-for="result in resultList" :key="result.id" class="md-layout-item md-size md-small-size-100 result-card">
+            <nav-tabs-card no-label>
+              <template slot="content">
+                <md-tabs class="md-primary" md-alignment="left">
+                  <md-tab id="tab-home" md-label="Informacion General" md-icon="info">
+                    <h3 class="text-left title">
+                      {{result.title}}
+                    </h3>
+                    <p class="text-muted text-left">{{result.authorString}}</p>
+                    <h5 class="text-left">DOI: {{result.doi}}</h5>
+                    <h5 class="text-left">Fecha de publicación: {{result.pubYear}}</h5>
+                  </md-tab>
+
+                  <md-tab id="tab-pages" md-label="Messages" md-icon="chat">
+                    <p>
+                      I think that’s a responsibility that I have, to push
+                      possibilities, to show people, this is the level that things
+                      could be at. I will be the leader of a company that ends up
+                      being worth billions of dollars, because I got the answers.
+                      I understand culture. I am the nucleus. I think that’s a
+                      responsibility that I have, to push possibilities, to show
+                      people, this is the level that things could be at.
+                    </p>
+                  </md-tab>
+
+                  <md-tab id="tab-posts" md-label="Settings" md-icon="build">
+                    <p>
+                      I think that’s a responsibility that I have, to push
+                      possibilities, to show people, this is the level that things
+                      could be at. So when you get something that has the name
+                      Kanye West on it, it’s supposed to be pushing the furthest
+                      possibilities. I will be the leader of a company that ends
+                      up being worth billions of dollars, because I got the
+                      answers. I understand culture. I am the nucleus.
+                    </p>
+                  </md-tab>
+                </md-tabs>
+              </template>
+            </nav-tabs-card>
+          </div>
+          <div class="md-layout" v-if="getResults">
+            <div class="md-layout-item pagination-section md-block wrapper">
+              <md-button class="md-primary md-sm" v-if="getPreviousPageUrls.length>0" @click="previousPageResults()">
+                <md-icon>navigate_before</md-icon>
+                Anterior
+              </md-button>
+              <md-button class="md-primary md-sm" v-if="getNextPageUrl" @click="nextPageResults()">
+                Siguiente
+                <md-icon>navigate_next</md-icon>
+              </md-button>
             </div>
           </div>
-
-          <div class="sharing-area text-center">
-            <div class="md-layout">
-              <div class="md-layout-item">
-                <h3>Thank you for supporting us!</h3>
-              </div>
+          <div class="md-layout results-text">
+            <div class="md-layout-item">
+              <h4 v-if="queryString" class="text-left">
+                Pagina <b class="text-primary">"{{getPreviousPageUrls.length+1}}"</b> de <b class="text-primary">"{{Math.trunc(hitCount/pageSize)+1}}"</b> 
+              </h4>
             </div>
-
-            <md-button class="md-twitter"
-              ><i class="fab fa-twitter"></i>Tweet</md-button
-            >
-            <md-button class="md-facebook"
-              ><i class="fab fa-facebook-square"></i> Share</md-button
-            >
-            <md-button class="md-google"
-              ><i class="fab fa-google-plus"></i> Share</md-button
-            >
-            <md-button class="md-github"
-              ><i class="fab fa-github"></i> Star</md-button
-            >
+            <div class="md-layout-item">
+              <p v-if="queryString" class="text-right text-muted">
+                <b>"{{hitCount}}"</b> <span class="">Resultados encontrados</span>
+              </p>
+            </div>
+          </div>
+          <div class="md-layout" v-if="loading">
+            <md-icon class="fa-spin md-size-5x">restore_page</md-icon>
           </div>
         </div>
       </div>
@@ -279,29 +133,11 @@
 </template>
 
 <script>
-import BasicElements from "./components/BasicElementsSection";
-import Navigation from "./components/NavigationSection";
-import SmallNavigation from "./components/SmallNavigationSection";
-import Tabs from "./components/TabsSection";
-import NavPills from "./components/NavPillsSection";
-import Notifications from "./components/NotificationsSection";
-import TypographyImages from "./components/TypographyImagesSection";
-import JavascriptComponents from "./components/JavascriptComponentsSection";
-import { LoginCard } from "@/components";
+import { NavTabsCard } from "@/components";
 import { mapGetters, mapActions } from 'vuex'
-
-
 export default {
   components: {
-    BasicElements,
-    Navigation,
-    SmallNavigation,
-    Tabs,
-    NavPills,
-    Notifications,
-    TypographyImages,
-    JavascriptComponents,
-    LoginCard
+    NavTabsCard
   },
   name: "index",
   bodyClass: "index-page",
@@ -345,12 +181,19 @@ export default {
       email: null,
       password: null,
       leafShow: false,
-      searchInput: ''
+      searchInput: '',
+      pageSize: 5,
+      queryString: null,
+      resultList: null,
+      hitCount: null,
+      loading: false,
     };
   },
   methods: {
     ...mapActions('scholarAPI', [
       'search',
+      'nextPage',
+      'previousPage'
     ]),
     leafActive() {
       if (window.innerWidth < 768) {
@@ -359,14 +202,46 @@ export default {
         this.leafShow = true;
       }
     },
-    searchResults(){
-      console.log(this.searchInput)
-      this.search(this.searchInput);
+    async searchResults(){
+      if (this.pageSize < 5){
+        this.pageSize = 5;
+        this.searchInput = ""
+      }
+      if (!this.searchInput == ""){
+        this.loading = true;
+        await this.search({query: this.searchInput, pageSize: this.pageSize, nextPage: this.nextPageUrl});
+        this.loading = false;
+        this.queryString = this.getResults.data.request.queryString;
+        this.resultList = this.getResults.data.resultList.result;
+        this.hitCount = this.getResults.data.hitCount;
+      }
+    },
+    async nextPageResults(){
+      if (!this.searchInput == ""){
+        this.loading = true;
+        await this.nextPage()
+        this.loading = false;
+        this.queryString = this.getResults.data.request.queryString;
+        this.resultList = this.getResults.data.resultList.result;
+        this.hitCount = this.getResults.data.hitCount;
+      }
+    },
+    async previousPageResults(){
+      if (!this.searchInput == ""){
+        this.loading = true;
+        await this.previousPage();
+        this.loading = false;
+        this.queryString = this.getResults.data.request.queryString;
+        this.resultList = this.getResults.data.resultList.result;
+        this.hitCount = this.getResults.data.hitCount;
+      }
     }
   },
   computed: {
     ...mapGetters('scholarAPI', [
       'getResults',
+      'getNextPageUrl',
+      'getPreviousPageUrls'
     ]),
     headerStyle() {
       return {
@@ -393,6 +268,22 @@ export default {
   .md-button + .md-button {
     margin-left: 5px;
   }
+}
+
+.results-text{
+  margin:2rem 0rem;
+}
+
+.result-card{
+  margin:0.5rem 0rem;
+}
+
+.pagination-section{
+  margin: 0 auto;
+}
+
+.wrapper{
+  text-align: center;
 }
 
 @media all and (min-width: 991px) {

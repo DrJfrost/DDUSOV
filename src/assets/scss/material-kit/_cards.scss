@@ -214,7 +214,7 @@
     [data-background-color="purple"],
     .md-card-header-primary,
     .md-tabs.md-primary .md-tabs-navigation{
-        background: linear-gradient(60deg, $purple-400, $purple-700);
+        background: linear-gradient(60deg, $deep-orange-900, $brand-primary);
         @include shadow-big-color($brand-primary);
     }
 

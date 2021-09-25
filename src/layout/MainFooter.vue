@@ -8,8 +8,8 @@
       <nav>
         <ul>
           <li>
-            <a href="https://www.creative-tim.com">
-              Creative Tim
+            <a href="https://github.com/DrJfrost/">
+              Dr Jfrost
             </a>
           </li>
           <li>
@@ -31,7 +31,7 @@
       </nav>
       <div class="copyright">
         &copy; {{ year }}, made with <md-icon>favorite</md-icon> by
-        <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a>
+        <a href="https://github.com/DrJfrost/" target="_blank">Dr Jfrost</a>
         for a better web.
       </div>
     </div>

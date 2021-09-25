@@ -8,7 +8,7 @@
         <div class="md-layout-item">
           <div class="tim-typo">
             <h1>
-              <span class="tim-note">Header 1</span>The Life of Material Kit
+              The Life of Material Kit
             </h1>
           </div>
           <div class="tim-typo">
