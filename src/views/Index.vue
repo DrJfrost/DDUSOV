@@ -9,8 +9,8 @@
             <img :src="leaf2" alt="leaf2" class="leaf2" v-show="leafShow" />
             <img :src="leaf1" alt="leaf1" class="leaf1" v-show="leafShow" />
             <div class="brand">
-              <h1>DDUSOV</h1>
-              <h3>Desarrollo de un sitio observatorio de vigilancia tecnológica</h3>
+              <h1>OVT</h1>
+              <h3>Observatorio de vigilancia tecnológica</h3>
             </div>
           </div>
         </div>
@@ -20,7 +20,7 @@
       <div class="section section-basic">
         <div class="container">
           <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
-            <h2 class="text-center text-primary title">Virtus</h2>
+            <h2 class="text-center text-primary title">Observatorio de Vigilancia Tecnológica  VIRTUS</h2>
             <md-field>
               <md-icon>search</md-icon>
               <label>Ingrese el texto de busqueda</label>

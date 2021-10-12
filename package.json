@@ -1,7 +1,7 @@
 {
-  "name": "ddusov",
+  "name": "OVT",
   "author": "Creative Tim https://www.creative-tim.com/",
-  "description": "Desarrollo de un sitio observatorio de vigilancia tecnológica",
+  "description": "Observatorio de vigilancia tecnológica - VIRTUS",
   "version": "1.2.2",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
     "core-js": "3.5.0",
     "nouislider": "14.1.0",
     "v-tooltip": "2.0.2",
-    "vue": "2.6.10",
+    "vue": "^2.6.10",
     "vue-axios": "^3.3.6",
     "vue-carousel": "0.18.0",
     "vue-clickaway": "2.2.2",
