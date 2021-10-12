@@ -19,10 +19,12 @@ import store from '@/store/store';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import MaterialKit from "./plugins/material-kit";
+import { BootstrapVue }  from "bootstrap-vue"
 
 Vue.config.productionTip = false;
 
 Vue.use(MaterialKit);
+Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 
 const NavbarStore = {

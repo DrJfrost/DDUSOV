@@ -2,6 +2,7 @@
   <md-card
     class="md-card-nav-tabs"
     :class="{ 'no-label': noLabel, 'md-card-plain': tabsPlain }"
+    md-with-hover
   >
     <md-card-content>
       <slot name="content"></slot>
